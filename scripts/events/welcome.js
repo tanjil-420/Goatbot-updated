@@ -1,4 +1,3 @@
-const fontPath = process.cwd() + "/scripts/cmds/canvas/fonts/Rounded.otf";
 const {
     createCanvas,
     loadImage,
@@ -7,8 +6,32 @@ const {
 const fs = require('fs-extra');
 const path = require('path');
 
-registerFont(fontPath, {
-    family: 'CoreSansAR'
+const fontDir = process.cwd() + "/scripts/cmds/assets/font";
+const canvasFontDir = process.cwd() + "/scripts/cmds/canvas/fonts";
+
+registerFont(path.join(fontDir, "BeVietnamPro-Bold.ttf"), {
+    family: 'BeVietnamPro',
+    weight: 'bold'
+});
+
+registerFont(path.join(fontDir, "BeVietnamPro-SemiBold.ttf"), {
+    family: 'BeVietnamPro',
+    weight: '600'
+});
+
+registerFont(path.join(fontDir, "BeVietnamPro-Regular.ttf"), {
+    family: 'BeVietnamPro',
+    weight: 'normal'
+});
+
+registerFont(path.join(fontDir, "Kanit-SemiBoldItalic.ttf"), {
+    family: 'Kanit',
+    weight: '600',
+    style: 'italic'
+});
+
+registerFont(path.join(canvasFontDir, "Rounded.otf"), {
+    family: 'Rounded'
 });
 
 async function createWelcomeCanvas(gcImg, img1, img2, userName, userNumber, threadName, potato) {
@@ -240,21 +263,21 @@ async function createWelcomeCanvas(gcImg, img1, img2, userName, userNumber, thre
         }
     }
     await drawCircularImage(img2, width - 120, 100, 55, '#f97316');
-    ctx.font = 'bold 20px CoreSansAR, sans-serif';
+    ctx.font = 'bold 20px "BeVietnamPro"';
     ctx.fillStyle = '#f97316';
     ctx.textAlign = 'right';
     ctx.fillText('Added by '+potato, width - 190, 105);
     await drawCircularImage(img1, 120, height - 100, 55, '#ea580c');
-    ctx.font = 'bold 24px CoreSansAR, sans-serif';
+    ctx.font = 'bold 24px "BeVietnamPro"';
     ctx.fillStyle = '#ffffff';
     ctx.textAlign = 'left';
     ctx.fillText(userName, 190, height - 95);
     await drawCircularImage(gcImg, width / 2, 200, 90, '#f97316', 6);
-    ctx.font = 'bold 42px CoreSansAR, sans-serif';
+    ctx.font = '600 42px "BeVietnamPro"';
     ctx.fillStyle = '#ffffff';
     ctx.textAlign = 'center';
     ctx.fillText(threadName, width / 2, 335);
-    ctx.font = 'bold 56px CoreSansAR, sans-serif';
+    ctx.font = 'italic 600 56px "Kanit"';
     const nameGradient = ctx.createLinearGradient(width / 2 - 200, 0, width / 2 + 200, 0);
     nameGradient.addColorStop(0, '#f97316');
     nameGradient.addColorStop(1, '#ea580c');
@@ -266,7 +289,7 @@ async function createWelcomeCanvas(gcImg, img1, img2, userName, userNumber, thre
     ctx.moveTo(width / 2 - 180, 430);
     ctx.lineTo(width / 2 + 180, 430);
     ctx.stroke();
-    ctx.font = 'bold 26px sans-serif';
+    ctx.font = '600 26px "BeVietnamPro"';
     ctx.fillStyle = '#a0a0a0';
     ctx.textAlign = 'center';
     ctx.fillText(`You are the ${userNumber}th member`, width / 2, 480);
